@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<configuration>
+	<threads>1</threads>
+	<run>Progol</run>
+	<runs>
+		<Progol>
+			<methods>
+				<method>
+					<name>Statistical</name>
+						<rater><class>prefwork.rater.MethodRater</class>
+							<method>prefwork.method.ProgolBridge<noise>50.0</noise></method>        					
+						 </rater>
+				</method>
+				 <method>
+					<name>ProgolBridge</name>
+        			<noise>50.0</noise>         
+				</method>
+				<method>
+					<name>Statistical</name>
+						<rater><class>prefwork.rater.MethodRater</class>
+							<method>prefwork.method.ProgolBridge<noise>20.0</noise></method>
+        					
+						 </rater>
+				</method>
+				 <method>
+					<name>ProgolBridge</name>
+        			<noise>20.0</noise>         
+				</method>
+				<method>
+					<name>Statistical</name>
+						<rater><class>prefwork.rater.MethodRater</class>
+							<method>prefwork.method.ProgolBridge<noise>0.0</noise></method>
+        					
+						 </rater>
+				</method>
+				 <method>
+					<name>ProgolBridge</name>
+        			<noise>0.0</noise>         
+				</method>
+				 <method>
+					<name>ProgolBridge</name>
+        			<noise>0.0</noise>      
+        			<monotonize>true</monotonize>
+				</method>
+				<method>
+					<name>Statistical</name>
+						<rater><class>prefwork.rater.MethodRater</class>
+							<method>prefwork.method.ProgolBridge<noise>0.0</noise>
+        					<monotonize>true</monotonize></method>        					
+						 </rater>
+				</method>
+				<method>
+					<name>Statistical</name>
+						<rater><class>prefwork.rater.MethodRater</class>
+							<method>prefwork.method.ProgolBridge<noise>50.0</noise>
+        					<monotonize>true</monotonize></method>        					
+						 </rater>
+				</method>
+			</methods>
+
+		  <dbs> 
+		  <!-- TH9car,TH10cmc,TH25nursery,TH32post-operative,TH35tae,TH38wine,TH39winequality-red,TH40winequality-white,TH49poker-hand-filtered -->   
+			 <db>
+				<name>TH</name>
+				<maxLoad>200</maxLoad>
+				<datasources>TH9car,TH10cmc,TH25nursery,TH32post-operative,TH35tae,TH38wine,TH39winequality-red,TH40winequality-white</datasources>
+			</db>
+          </dbs>
+          <tests>      
+          		<test>
+	              <class>prefwork.test.Bootstrap</class>	
+	               <trainSets>10,20,30,40,50</trainSets>
+	              <path>ProgolTestCompTH</path>
+	              <numberOfRuns>20</numberOfRuns>
+				  <testInterpreter><class>prefwork.test.DataMiningStatistics</class></testInterpreter>
+	            </test>   
+          </tests>
+		</Progol>
+		
+		<sushi>
+			<methods>
+				<method>
+					<name>Statistical</name>
+				</method>
+				<method>
+					<name>Instances</name>
+				</method><method>
+					<name>SVMReg</name>
+				</method> 
+				<!--
+				<method>
+					<name>Statistical</name>
+					<rater>
+						<class>prefwork.rater.WeightAverage</class>
+						<weights>ALL_1</weights>
+					</rater>
+				</method> <method>
+					<name>SVMReg</name>
+				</method> 
+				<method>
+					<name>Instances</name>
+				</method>
+			   -->
+			</methods>
+			<dbs>
+				<db>
+					<name>THMulti</name>
+					<datasources>TH50sushi</datasources>
+					<userCount>100</userCount>
+				</db>
+			</dbs>
+			<tests>
+				<test>
+					<class>prefwork.test.Bootstrap</class>
+					<numberOfRuns>20</numberOfRuns>
+					<trainSets>3,4,5,6,7,8,9</trainSets>
+					<path>resSushi10b</path>
+					<testInterpreter>
+						<class>prefwork.test.DataMiningStatistics</class>
+					</testInterpreter>
+				</test>
+			</tests>
+		</sushi>
+		
+		<sushiColl>
+			<methods>
+				
+				
+				<method>
+					<name>Statistical</name>
+				</method>
+				<method>
+					<name>SVMReg</name>
+				</method> 
+				<method>
+					<name>MultilayerPerceptron</name>
+				</method> 
+				<method>
+					<name>Instances</name>
+				</method>
+            	
+                
+            	<!-- <method>
+                  <name>CofiBridge</name>
+                  <knn>50</knn>              
+            	</method>
+				<method>
+					<name>StatisticalCollaborative</name>
+					<computeOthers>true</computeOthers>
+					<computeSelf>true</computeSelf>
+					<knn>500</knn>
+					<threshold>0.1</threshold>
+				</method> -->
+			</methods>
+
+			<dbs>
+
+				<db>					
+					<name>SushiCollaborative</name>
+					<userCount>5000</userCount>
+					<datasources>TH50sushi</datasources>
+					<renameObjects>false</renameObjects>
+					
+				</db>
+			</dbs>
+			<tests>
+				<test>
+					<class>prefwork.test.TestTrainAbsoluteCollaborative</class>
+					<trainSets>3,4,5,6,7,8,9</trainSets>
+					<usersToTest>5000</usersToTest>
+					<path>resCollSushiOstre5000NoColl</path>
+					<testInterpreter>
+						<class>prefwork.test.DataMiningStatistics</class>
+					</testInterpreter>
+				</test>
+			</tests>
+		</sushiColl>
+			</runs>
+</configuration>

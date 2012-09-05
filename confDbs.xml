@@ -1,0 +1,25 @@
+<dbs>
+	<TH>
+		<class>prefwork.datasource.THDataSource</class>
+	</TH>
+	<THMulti>
+		<class>prefwork.datasource.THMultiUserDataSource</class>
+	</THMulti>
+
+	<MySQLflix>
+		<class>prefwork.datasource.MySQLDataSource</class>
+		<db>netflix</db>
+		<userName>username</userName>
+		<password>password</password>
+	</MySQLflix>
+	<MySQLframework>
+		<class>prefwork.datasource.MySQLDataSource</class>
+		<db>framework</db>
+		<userName>username</userName>
+		<password>password</password>
+	</MySQLframework>
+	<SushiCollaborative>
+		<class>prefwork.datasource.SushiSource</class>
+		<innerclass>prefwork.datasource.THMultiUserDataSource</innerclass>
+	</SushiCollaborative>
+</dbs>
